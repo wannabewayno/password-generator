@@ -125,21 +125,76 @@
 
     <!-- Start Section how to use this page -->
     <section>
-
+        <artcile>
+            <h3>
+                How to use this site
+            </h3>
+            <p>
+                This site allows you to uniquely generate a random pass-phrase by pressing the big red "generate Passphrase" button below.
+                The passphrase will displayed in the section above. So don't use this in a public space, okay.
+            </p>
+        </artcile>
+        <article>
+            <h3>
+                How this site generates your unique passphrase
+            </h3>
+            <h4>
+                The Diceware method
+            </h4>
+            <hr>
+            <p>
+                This method typically uses 5 dice to generate a 5-digit random number. This number corresponds to a word in an associated look-up-table. 
+                You generate as many numbers as words you want. 
+            </p>
+            <p>
+                For example: You roll 5 dice and get the numbers 4-2-3-1-1, this would be the number "42311", and in the english look-up-table this number corresponds to the word "nuzzle".
+                You can do this 3 more times and get nuzzle-diligent-outmost-patchy, a 30 character passphrase. Arrange the words around to find the easiest way to memorise this passphrase.
+                I would proably use, diligent-nuzzle-outmost-patchy. To me it sounds like "a diligent nuzzle is outmost patchy" or something to that extent.
+            </p>
+            <p>
+                This site uses javascript to generate a random number that corresponds to a word in the various look-up-tables provided and string them together to give you a passphase.
+            </p>
+        </article>
+        <article>
+            <h4>
+                Use the toggle buttons below to choose
+            </h4>
+            <ul>
+                <li>
+                    The language/s you want to use
+                </li>
+                <li>
+                    The mix of those languages
+                </li>
+                <li>
+                    How many characters your pass-phrase can contain (minimum 8, max 128)
+                </li>
+                <li>
+                   
+                </li>
+            </ul>
+        </article>
     </section>
 
     <!-- password generator -->
     <section>
         <!-- Selection Criteria, a heap of toggle buttons-->
         <section>
-
+            <button>English</button>
+            <button>français</button>
+            <button>Espagnol</button>
+            <button>Русский</button>
+            <button>Italiano</button>
+            <input type="Character Count"></input>
         </section>
+
         <!-- Text box that displays completed pass-phrase -->
         <section>
 
         </section>
         <!-- Big Red button that generates passphrase -->
         <section>
+            <button>Generate Pass-Phrase<i class="fas fa-key"></i></button>
 
         </section>
     </section>
