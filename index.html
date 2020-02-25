@@ -181,21 +181,25 @@
         <!-- Selection Criteria, a heap of toggle buttons-->
         <section>
             <button>English</button>
-            <button>français</button>
+            <button>Français</button>
             <button>Espagnol</button>
             <button>Русский</button>
             <button>Italiano</button>
-            <input type="Character Count"></input>
+            <form>
+                <label for="character-count">Pass-Phrase Length</label>
+                <input type="character-count" id="character-count" placeholder="enter a number from 8 to 128"></input>
+            </form>
         </section>
 
         <!-- Text box that displays completed pass-phrase -->
         <section>
-
+            <label for="passphrase-output">Your secure Pass-Phrase</label>
+            <output id="passphrase-output" type="passphrase-output"></output>
         </section>
+
         <!-- Big Red button that generates passphrase -->
         <section>
-            <button>Generate Pass-Phrase<i class="fas fa-key"></i></button>
-
+            <button id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
         </section>
     </section>
 
@@ -203,7 +207,9 @@
 
     <!-- start footer -->
     <footer>
-
+        <h4>
+            SSH!<span><i class="fas fa-user-secret"></i></span>
+        </h4>
     </footer>
 
     <!-- Javascript reference -->
