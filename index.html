@@ -167,10 +167,17 @@
                     The mix of those languages
                 </li>
                 <li>
-                    How many characters your pass-phrase can contain (minimum 8, max 128)
-                </li>
-                <li>
-                   
+                    <dl>
+                        <dt>
+                            Toggle what method of pass-phrase length to used
+                            <dd>
+                                By number of words
+                            </dd>
+                            <dd>
+                                By number of characters
+                            </dd>
+                        </dt>
+                    </dl>
                 </li>
             </ul>
         </article>
@@ -185,9 +192,25 @@
             <button>Espagnol</button>
             <button>Русский</button>
             <button>Italiano</button>
+        </section>    
+        <section>
+            <label class="container">Generate by words
+                <input type="radio" checked="checked" name="radio" id="words"/>
+                <span class="checkmark"></span>
+            </label>
             <form>
-                <label for="character-count">Pass-Phrase Length</label>
-                <input type="character-count" id="character-count" placeholder="enter a number from 8 to 128"></input>
+                <label for="word-count">Pass-Phrase length by words</label>
+                <input type="text" id="word-count" placeholder="enter a number from 1 to 17"></input>
+            </form>
+        </section>
+        <section>
+            <label class="container">Generate by characters
+                <input type="radio" name="radio" id="characters"/>
+                <span class="checkmark"></span>
+            </label>
+            <form>
+                <label for="word-count">Pass-Phrase length by characters</label>
+                <input type="text" id="character-count" placeholder="enter a number from 8 to 128"></input>
             </form>
         </section>
 
@@ -199,8 +222,20 @@
 
         <!-- Big Red button that generates passphrase -->
         <section>
-            <button id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
+            <button type="submit" id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
         </section>
+        <!-- alphanumeric section to meet criteria -->
+        <!-- <section>
+            <button id="alphanumeric">Generate password <i class="fas fa-key"></i></button>
+        </section>
+        <form>
+            <label for="character-count">Password Length by Characters</label>
+            <input type="character-count" id="passwordcharacters" placeholder="enter a number from 8 to 128"></input>
+        </form>
+        <form>
+            <label for="word-count">include specials?</label>
+            <input type="word-count" id="include-specials" placeholder="how many out of your total?"></input>
+        </form> -->
     </section>
 
     </main>
@@ -214,5 +249,6 @@
 
     <!-- Javascript reference -->
     <script src="./assets/js/script.js"></script>
+    <!-- <script src="./assets/js/script2.js"></script> -->
 </body>
 </html>

@@ -14,34 +14,70 @@ var english = ["abacus","abdomen","abdominal","abide","abiding","ability","ablaz
 //French language
 
 
-function AvgWord(language) {
+function wordStats(language,characters) {
   var sum = 0;
   for (let i = 0; i < language.length; i++) {
     sum = sum + language[i].length;
   }
-  var avg = Math.round(sum/language.length);
+  var avg = (sum/language.length);
   console.log(avg);
-}
 
+  // var sumDev = 0
+  // for (let i = 0; i < language.length; i++) {
+  //   sumDev = sumDev + Math.abs((avg-language[i].length));
+  // }
+  // var stDev = sumDev/language.length;
+  // console.log(stDev);
 
-document.getElementById("generate").addEventListener("click",callback);
-
-function getcount() {
-  var count = parseInt(document.getElementById("character-count").value);
-  console.log(count);
-  console.log(typeof(count));
-}
-
-function callback() {
-  var userInput = document.getElementById("character-count").value
-  //Check to see if you have entered a passphrase number in the allowed range
-  if (userInput === ""|| parseInt(userInput) > 128 || parseInt(userInput) < 8){
-    alert("Please enter a desired pass-phrase length between 8 and 128 characters");
+  var wordIndex = [];
+  var letterBracket = 0;
+  var index = 0;
+  while (letterBracket < 128) {
+    letterBracket = (index+1)*avg + (index);
+    wordIndex[index] = letterBracket;
+    index++; 
   }
-  generate(english, parseInt(document.getElementById("character-count").value));
+   console.log(wordIndex.length);
+   var zcheck = [];
+   var character = characters;
+   for (let i = 0; i < wordIndex.length; i++) {
+     zcheck[i] = Math.abs(1 - (character/wordIndex[i]));
+   }
+   numberOfWords = zcheck.indexOf(Math.min(...zcheck))+1;
 }
 
-function generate(language, wordNumber) {
+
+document.getElementById("generate").addEventListener("click",generate);
+
+function generate(){
+  // creating dummy variables to help readability
+  var wordCount = parseInt(document.getElementById("word-count").value);
+  var characterCount = parseInt(document.getElementById("character-count").value);
+
+  //check what radio button is selected
+  if(document.getElementById("words").checked === true){
+    //check that the user has entered a number, and the number is within the allowed limits
+    if (isNaN(wordCount) === false && wordCount > 0 && wordCount < 18) {
+      //if user has checked the button to generate a pass-phrase by WORDS and they have entered an allowed number
+      //then generate a password by WORDS
+      generateByWords(english,wordCount);
+    } else {
+      alert("Please enter a word length from 1 to 17");
+    }
+  } else if (document.getElementById("characters").checked === true){
+    //check that the user has entered a number, and the number is within the allowed limits
+    if (isNaN(characterCount) === false && characterCount > 7 && characterCount < 129) {
+      //if user has checked the button to generate a pass-phrase by CHARACTERS and they have entered an allowed number
+      //then generate a password by CHARACTERS
+      generateByCharacters(english,characterCount)
+      // alert("NOT CURRENTLY SUPPORTED");
+    } else {
+      alert("Please enter a character length from 8 to 128");
+    }
+  }
+}
+
+function generateByWords(language, wordNumber) {
   var phrase = [];
   var passphrase = "";
   for (let i = 0; i < wordNumber; i++) {
@@ -49,8 +85,35 @@ function generate(language, wordNumber) {
     var word = language[randomnumber];
     phrase[2*i] = word;
     phrase[2*i+1] = "-";
-    passphrase = passphrase + phrase[2*i] + phrase [2*i+1];
+    passphrase += phrase[2*i] + phrase [2*i+1];
+
   }
   passphrase = passphrase.substring(0,passphrase.length - 1);
+  document.getElementById("passphrase-output").innerHTML = passphrase;
+}
+
+function generateByCharacters(language,characters){
+  console.log("NUMBER OF CHARACTERS "+characters);
+  console.log(typeof(characters));
+  wordStats(language,characters);
+  console.log("NUMBER OF WORDS "+numberOfWords);
+  start: while (true) {
+    var phrase = [];
+    var passphrase = "";
+    for (let i = 0; i < numberOfWords; i++) {
+      var randomnumber = Math.floor(Math.random()*language.length);
+      var word = language[randomnumber];
+      phrase[2*i] = word;
+      phrase[2*i+1] = "-";
+      passphrase += phrase[2*i] + phrase[2*i+1];
+    }
+    passphrase = passphrase.substring(0,passphrase.length - 1);
+    console.log(passphrase);
+    if (passphrase.length === characters) {
+      break;
+    }
+  }
+  console.log("characters: "+passphrase.length);
+
   document.getElementById("passphrase-output").innerHTML = passphrase;
 }
