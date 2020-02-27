@@ -13,70 +13,86 @@ var english = ["abacus","abdomen","abdominal","abide","abiding","ability","ablaz
 
 //French language
 
+// EVENT LISTENERS
+var generatebuttonEL = document.getElementById("generate")
+var buttonBoxEl = document.getElementById("buttonBox");
+var  radioButtonEl = document.getElementById("radio-button");
+var specialCharacterSliderEL= document.getElementById("specials");
+var numberSliderEl= document.getElementById("numbers");
 
-function wordStats(language,characters) {
-  var sum = 0;
-  for (let i = 0; i < language.length; i++) {
-    sum = sum + language[i].length;
-  }
-  var avg = (sum/language.length);
-  console.log(avg);
+buttonBoxEl.addEventListener("click",stickyButton);
+generatebuttonEL.addEventListener("click",generate);
+radioButtonEl.addEventListener("click",radioButtons);
+specialCharacterSliderEL.addEventListener("click",isChecked);
+numberSliderEl.addEventListener("click",isChecked);
 
-  // var sumDev = 0
-  // for (let i = 0; i < language.length; i++) {
-  //   sumDev = sumDev + Math.abs((avg-language[i].length));
-  // }
-  // var stDev = sumDev/language.length;
-  // console.log(stDev);
 
-  var wordIndex = [];
-  var letterBracket = 0;
-  var index = 0;
-  while (letterBracket < 128) {
-    letterBracket = (index+1)*avg + (index);
-    wordIndex[index] = letterBracket;
-    index++; 
-  }
-   console.log(wordIndex.length);
-   var zcheck = [];
-   var character = characters;
-   for (let i = 0; i < wordIndex.length; i++) {
-     zcheck[i] = Math.abs(1 - (character/wordIndex[i]));
-   }
-   numberOfWords = zcheck.indexOf(Math.min(...zcheck))+1;
+// a useful Boolean function for parsing strings (REQUIRED FOR BUTTONBOX)
+function parseBool(val) {
+    return val === true || val === "true"
+}
+// Buttonbox LANGUAGES SELECTION
+function stickyButton(event) {
+  var button = event.target;
+    if(button.matches("button")) {
+        if (parseBool(button.getAttribute("name")) === false){
+            button.setAttribute("class", "button activated");
+            button.setAttribute("name" , "true");
+        
+        } else {
+            button.setAttribute("class", "button default");
+            button.setAttribute("name" , "false");
+        }
+    }
 }
 
+//Radio buttons LENGTH SELECTION
+function radioButtons(event) {
+  var radioButton = event.target;
+  var placeholder = radioButton.getAttribute("placeholder");
+  var input = document.getElementById("length");
+    if(radioButton.matches("input")) {
+        if (parseBool(radioButton.getAttribute("name")) === false){
+            input.setAttribute("placeholder", placeholder);
+            radioButton.setAttribute("name" , "true");
+        
+        } else {
+            input.setAttribute("placeholder", placeholder);
+            radioButton.setAttribute("name" , "false");
+        }
+    }
+}
 
-document.getElementById("generate").addEventListener("click",generate);
+// Checking and setting slider status, default is OFF
+function isChecked() {
+  if (parseBool(event.target.getAttribute("name")) === true) {
+    event.target.setAttribute("name", "false");
+  } else {
+    event.target.setAttribute("name", "true");
+  }
+  console.log("is this button turned on? "+event.target.getAttribute("name"));
+} 
 
+// Generation Pre-processor
 function generate(){
-  // creating dummy variables to help readability
-  var wordCount = parseInt(document.getElementById("word-count").value);
-  var characterCount = parseInt(document.getElementById("character-count").value);
-
-  //check what radio button is selected
+  var length = parseInt(document.getElementById("length").value);
+  
   if(document.getElementById("words").checked === true){
-    //check that the user has entered a number, and the number is within the allowed limits
-    if (isNaN(wordCount) === false && wordCount > 0 && wordCount < 18) {
-      //if user has checked the button to generate a pass-phrase by WORDS and they have entered an allowed number
-      //then generate a password by WORDS
-      generateByWords(english,wordCount);
+    if (isNaN(length) === false && length > 0 && length < 17) {
+      generateByWords(english,length);
     } else {
       alert("Please enter a word length from 1 to 17");
     }
   } else if (document.getElementById("characters").checked === true){
-    //check that the user has entered a number, and the number is within the allowed limits
-    if (isNaN(characterCount) === false && characterCount > 7 && characterCount < 129) {
-      //if user has checked the button to generate a pass-phrase by CHARACTERS and they have entered an allowed number
-      //then generate a password by CHARACTERS
-      generateByCharacters(english,characterCount)
-      // alert("NOT CURRENTLY SUPPORTED");
+    if (isNaN(length) === false && length > 7 && length < 129) {
+      generateByCharacters(english,length);
     } else {
       alert("Please enter a character length from 8 to 128");
     }
   }
 }
 
+// PASSWORD GENERATION FUNCTIONS
 function generateByWords(language, wordNumber) {
   var phrase = [];
   var passphrase = "";
@@ -86,17 +102,23 @@ function generateByWords(language, wordNumber) {
     phrase[2*i] = word;
     phrase[2*i+1] = "-";
     passphrase += phrase[2*i] + phrase [2*i+1];
-
   }
   passphrase = passphrase.substring(0,passphrase.length - 1);
+  // passphrase generated, modify with special characters if turned on
+  if (specialCharacterSliderEL.getAttribute("name")===true) {
+
+  }
+
+  // modify with numbers if turned on
+  if (numberSliderEl.getAttribute("name")===true){
+
+  }
+
   document.getElementById("passphrase-output").innerHTML = passphrase;
 }
 
 function generateByCharacters(language,characters){
-  console.log("NUMBER OF CHARACTERS "+characters);
-  console.log(typeof(characters));
   wordStats(language,characters);
-  console.log("NUMBER OF WORDS "+numberOfWords);
   start: while (true) {
     var phrase = [];
     var passphrase = "";
@@ -113,7 +135,29 @@ function generateByCharacters(language,characters){
       break;
     }
   }
-  console.log("characters: "+passphrase.length);
-
   document.getElementById("passphrase-output").innerHTML = passphrase;
+}
+
+
+function wordStats(language,characterCount) {
+  var sum = 0;
+  for (let i = 0; i < language.length; i++) {
+    sum += language[i].length;
+  }
+  var avg = (sum/language.length);
+
+  var wordIndex = [];
+  var letterBracket = 0;
+  var index = 0;
+  while (letterBracket < 128) {
+    letterBracket = (index+1)*avg + (index);
+    wordIndex[index] = letterBracket;
+    index++; 
+  }
+   var zcheck = [];
+   var character = characterCount;
+   for (let i = 0; i < wordIndex.length; i++) {
+     zcheck[i] = Math.abs(1 - (character/wordIndex[i]));
+   }
+   numberOfWords = zcheck.indexOf(Math.min(...zcheck))+1;
 }

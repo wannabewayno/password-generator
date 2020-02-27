@@ -11,18 +11,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
     <!-- Google fonts link -->
 
+    <!-- BootStrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Custom CSS link -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 <body>
     <!-- Start Header -->
-    <header>
-        <h1>SSH!<span><i class="fas fa-user-secret"></i></span></h1>
-    </header>
-    <!-- End Header -->
-    <main>
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <h1 class="navbar-brand">
+            <span class="display-4">
+                <i class="fas fa-user-secret"></i> SSH!
+            </span>
+        </h1>
+    </nav>
 
+    <main>
     <!-- Start section Passphrase guidelines -->
     <section>
         <article>
@@ -49,9 +54,9 @@
 
                 <dl>
                     <dt>
-                        <h6>
+                        <h>
                             Forcing users to frequently change their passwords.
-                        </h6>
+                        </h>
                         <dd>
                             <p>
                                 Most businesses, corporations, schools/universities do this to increase secruity. Makes sense, but does it?
@@ -69,9 +74,9 @@
                         </dd>
                     </dt>
                     <dt>
-                        <h6>
+                        <h>
                             The use of special characters
-                        </h6>
+                        </h>
                         <dd>
                             <p>
                             Having a heap of special characters theoretically makes your password stronger, yes. However it usually contradicts the old "making it memorable clause" again.
@@ -92,9 +97,9 @@
                         </dd>
                     </dt>
                     <dt>
-                        <h6>
+                        <h>
                             1337 Speak (<em>leet speak</em>)
-                        </h6>
+                        </h>
                         <dd>
                             This is very much the same as the special character argument, however only a few letters have number comparisons, and look up tables exist for common passwords with leet speak in them... This doesn't really make your password any stronger and again, it's harder to remember than plain english. In reality to achieve numbers in your password, people tend to just add them at the end (like rotated passwords); Guess what, if you know this, so do attackers everywhere and they have smarter algorithms that target this mindset.
                             So I'll leave it there.
@@ -134,13 +139,13 @@
                 The passphrase will displayed in the section above. So don't use this in a public space, okay.
             </p>
         </artcile>
-        <article>
-            <h3>
-                How this site generates your unique passphrase
-            </h3>
+        <article
             <h4>
-                The Diceware method
+                How this site works
             </h4>
+            <h5>
+                The Diceware method
+            </h5>
             <hr>
             <p>
                 This method typically uses 5 dice to generate a 5-digit random number. This number corresponds to a word in an associated look-up-table. 
@@ -152,103 +157,103 @@
                 I would proably use, diligent-nuzzle-outmost-patchy. To me it sounds like "a diligent nuzzle is outmost patchy" or something to that extent.
             </p>
             <p>
-                This site uses javascript to generate a random number that corresponds to a word in the various look-up-tables provided and string them together to give you a passphase.
+                This site uses javascript to generate a random number that corresponds to a word in the various look-up-tables provided. Then it strings them together modifies it with your preferences and generates you a secure, unique pass-phrase.
             </p>
         </article>
         <article>
             <h4>
-                Use the toggle buttons below to choose
+                Use the toggle buttons below to choose.
             </h4>
-            <ul>
+            <ol>
                 <li>
-                    The language/s you want to use
+                    The language/s you want to use.
                 </li>
                 <li>
-                    The mix of those languages
+                    Select the method of pass-phrase length.
+                    <dd>
+                        By number of words
+                    </dd>
+                    <dd>
+                        By number of characters
+                    </dd>
                 </li>
                 <li>
-                    <dl>
-                        <dt>
-                            Toggle what method of pass-phrase length to used
-                            <dd>
-                                By number of words
-                            </dd>
-                            <dd>
-                                By number of characters
-                            </dd>
-                        </dt>
-                    </dl>
+                    If you want to include Special Characters.
                 </li>
-            </ul>
+                <li>
+                    if you want include numbers.
+                </li>
+                
+            </ol>
         </article>
     </section>
 
     <!-- password generator -->
     <section>
         <!-- Selection Criteria, a heap of toggle buttons-->
-        <section>
-            <button>English</button>
-            <button>Français</button>
-            <button>Espagnol</button>
-            <button>Русский</button>
-            <button>Italiano</button>
-        </section>    
-        <section>
-            <label class="container">Generate by words
-                <input type="radio" checked="checked" name="radio" id="words"/>
-                <span class="checkmark"></span>
-            </label>
+        
+        <section id="buttonBox">
+            <button type="button" name="false" class="button default">English</button>
+            <button type="button" name="false" class="button default">Français</button>
+            <button type="button" name="false" class="button default">Espagnol</button>
+            <button type="button" name="false" class="button default">Italiano</button>
+            <button type="button" name="false" class="button default">Русский</button>
+        </section>
+         
+        
+        <fieldset>
             <form>
-                <label for="word-count">Pass-Phrase length by words</label>
-                <input type="text" id="word-count" placeholder="enter a number from 1 to 17"></input>
+            <input type="number" class="form-control" id="length" aria-describedby="choose a length" placeholder="8 - 128 Characters">
+            <div class="btn-group btn-group-toggle" id="radio-button" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="false" placeholder ="8 - 128 Characters" id="characters" checked> Generate by Characters
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="false" placeholder = "1-16 words" id="words"> Generate by Words
+                </label>
+            </div>
             </form>
-        </section>
-        <section>
-            <label class="container">Generate by characters
-                <input type="radio" name="radio" id="characters"/>
-                <span class="checkmark"></span>
-            </label>
             <form>
-                <label for="word-count">Pass-Phrase length by characters</label>
-                <input type="text" id="character-count" placeholder="enter a number from 8 to 128"></input>
+                <form>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="specials" name="false">
+                        <label class="custom-control-label" for="specials">Include Special characters?</label>
+                    </div>
+                </form>
+                <form>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="numbers" name="false">
+                        <label class="custom-control-label" for="numbers">Include Numbers?</label>
+                    </div>
+                </form>
             </form>
-        </section>
-
-        <!-- Text box that displays completed pass-phrase -->
-        <section>
-            <label for="passphrase-output">Your secure Pass-Phrase</label>
-            <output id="passphrase-output" type="passphrase-output"></output>
-        </section>
-
-        <!-- Big Red button that generates passphrase -->
-        <section>
-            <button type="submit" id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
-        </section>
-        <!-- alphanumeric section to meet criteria -->
-        <!-- <section>
-            <button id="alphanumeric">Generate password <i class="fas fa-key"></i></button>
-        </section>
-        <form>
-            <label for="character-count">Password Length by Characters</label>
-            <input type="character-count" id="passwordcharacters" placeholder="enter a number from 8 to 128"></input>
-        </form>
-        <form>
-            <label for="word-count">include specials?</label>
-            <input type="word-count" id="include-specials" placeholder="how many out of your total?"></input>
-        </form> -->
+            <div class="form-group">
+                <label for="passphrase-output">Your unique Pass-Phrase:</label>
+                <textarea class="form-control" id="passphrase-output" rows="3"></textarea>
+            </div>
+                <!-- Big Red button that generates passphrase -->
+            <section>
+                <button class="BigRedButton" type="submit" id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
+            </section>
+        </fieldset>
     </section>
-
     </main>
 
     <!-- start footer -->
-    <footer>
-        <h4>
-            SSH!<span><i class="fas fa-user-secret"></i></span>
-        </h4>
+    <footer class="navbar bg-dark navbar-dark py-0 d-flex justify-content-center">
+        <h2 class="navbar-brand">
+            <span class="h3 lead">
+                <i class="fas fa-user-secret"></i> SSH!
+            </span>
+        </h2>
     </footer>
 
     <!-- Javascript reference -->
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/input.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- <script src="./assets/js/script2.js"></script> -->
 </body>
 </html>
