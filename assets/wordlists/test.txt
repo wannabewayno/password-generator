@@ -1,7 +1,0 @@
-Line1 - This is some text in a text file
-
-line3 - this is line 3
-line4 - this is line 4
-
-
-line7 -  this is line 7
