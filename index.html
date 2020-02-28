@@ -27,8 +27,9 @@
         </h1>
     </nav>
 
-    <main>
+    <main class="container mx-lg-5">
     <!-- Start section Passphrase guidelines -->
+    
     <section>
         <article>
             <h3>
@@ -45,12 +46,11 @@
                         Memorising your password
                     </li>
                 </ol>
-                Is that it? - yeah pretty much
+                That's pretty much it.
             </p>
             <p>
                 The last 30 years of enterprise level computing has taught us a few lessons.
-                Foremost the most important one to take home is that we're really bad at making passwords.
-                Let's go through a few common myths about creating strong passwords and why the new guidelines don't use them.
+                The most important lesson to take home is that we're really bad at making passwords.
             </p>
 
             <h3>
@@ -71,7 +71,6 @@
                 So this Site will allow you to generate a pass-phrase that will hopefully be memorable for you. See the next section on how to use this site <i class="fas fa-arrow-right"></i> 
             </p>
         </article>
-
     </section>
 
     <!-- Start Section how to use this page -->
@@ -87,11 +86,8 @@
         </artcile>
         <article>
             <h4>
-                How this site works
+                How this site works: <span class="font-italic">The Diceware method<span>
             </h4>
-            <h5>
-                The Diceware method
-            </h5>
             <hr>
             <p>
                 This method typically uses 5 dice to generate a 5-digit random number. This number corresponds to a word in an associated look-up-table. 
@@ -112,7 +108,7 @@
             </h4>
             <ol>
                 <li>
-                    The language/s you want to use.
+                    The language/s you want to use (more than one can be selected)
                 </li>
                 <li>
                     Select the method of pass-phrase length.
@@ -135,53 +131,52 @@
     </section>
 
     <!-- password generator -->
-    <section>
-        <!-- Selection Criteria, a heap of toggle buttons-->
-        
-        <section id="buttonBox">
-            <button type="button" name="false" class="button default">English</button>
-            <button type="button" name="false" class="button default">Français</button>
-            <button type="button" name="false" class="button default">Espagnol</button>
-            <button type="button" name="false" class="button default">Italiano</button>
-            <button type="button" name="false" class="button default">Русский</button>
-        </section>
-         
-        
-        <fieldset>
-            <form>
-            <input type="number" class="form-control" id="length" aria-describedby="choose a length" placeholder="8 - 128 Characters">
-            <div class="btn-group btn-group-toggle" id="radio-button" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" name="false" placeholder ="8 - 128 Characters" id="characters" checked> Generate by Characters
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" name="false" placeholder = "1-16 words" id="words"> Generate by Words
-                </label>
-            </div>
-            </form>
-            <form>
-                <form>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="specials" name="false">
-                        <label class="custom-control-label" for="specials">Include Special characters?</label>
-                    </div>
-                </form>
-                <form>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="numbers" name="false">
-                        <label class="custom-control-label" for="numbers">Include Numbers?</label>
-                    </div>
-                </form>
-            </form>
-            <div class="form-group">
-                <label for="passphrase-output">Your unique Pass-Phrase:</label>
-                <textarea class="form-control" id="passphrase-output" rows="3" readonly></textarea>
-            </div>
-                <!-- Big Red button that generates passphrase -->
-            <section>
-                <button class="BigRedButton" type="submit" id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
+    <section class="container mx-lg-5 px-lg-5">
+        <section class="container mx-lg-5 px-lg-5">
+            <!-- Selection Criteria, a heap of toggle buttons-->
+            
+            <!-- language Buttons -->
+            <section id="buttonBox"class=" d-flex flex-row flex-wrap flex-sm-row justify-content-center">
+                <button type="button" name="false" class="button default m-1">English</button>
+                <button type="button" name="false" class="button default m-1">Français</button>
+                <button type="button" name="false" class="button default m-1">Espagnol</button>
+                <button type="button" name="false" class="button default m-1">Italiano</button>
+                <button type="button" name="false" class="button default m-1">Русский</button>
             </section>
-        </fieldset>
+            
+            <fieldset>
+                <form class="container d-flex flex-column">
+                <input type="number" class="form-control" id="length" aria-describedby="choose a length" placeholder="8 - 128 Characters">
+                <div class="btn-group btn-group-toggle" id="radio-button" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                    <input type="radio" name="false" placeholder ="8 - 128 Characters" id="characters" checked> Generate by Characters
+                    </label>
+                    <label class="btn btn-secondary">
+                    <input type="radio" name="false" placeholder = "1-16 words" id="words"> Generate by Words
+                    </label>
+                </div>
+                </form>
+                <form class="d-flex flex-column flex-sm-row justify-content-center my-2">
+                        <div class="custom-control custom-switch form-group mx-2 my-1">
+                            <input type="checkbox" class="custom-control-input" id="specials" name="false">
+                            <label class="custom-control-label" for="specials">Include Special characters?</label>
+                        </div>
+
+                        <div class="custom-control custom-switch form-group mx-2 my-1">
+                            <input type="checkbox" class="custom-control-input" id="numbers" name="false">
+                            <label class="custom-control-label" for="numbers">Include Numbers?</label>
+                        </div>
+                </form>
+                <div class="form-group">
+                    <label for="passphrase-output">Your unique Pass-Phrase:</label>
+                    <textarea class="form-control" id="passphrase-output" rows="3" readonly></textarea>
+                </div>
+                    <!-- Big Red button that generates passphrase -->
+                <section>
+                    <button class="BigRedButton w-100 mb-2" type="submit" id="generate">Generate Pass-Phrase <i class="fas fa-key"></i></button>
+                </section>
+            </fieldset>
+        </section>
     </section>
     </main>
 
