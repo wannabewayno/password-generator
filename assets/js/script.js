@@ -13,6 +13,11 @@ var english = ["abacus","abdomen","abdominal","abide","abiding","ability","ablaz
 
 //French language
 
+// special characters
+var specialChar = ["!","@","#","$","?","&","*"];
+
+
+
 // EVENT LISTENERS
 var generatebuttonEL = document.getElementById("generate")
 var buttonBoxEl = document.getElementById("buttonBox");
@@ -95,47 +100,35 @@ function generate(){
 // PASSWORD GENERATION FUNCTIONS
 function generateByWords(language, wordNumber) {
   var phrase = [];
-  var passphrase = "";
   for (let i = 0; i < wordNumber; i++) {
     var randomnumber = Math.floor(Math.random()*language.length);
     var word = language[randomnumber];
     phrase[2*i] = word;
     phrase[2*i+1] = "-";
-    passphrase += phrase[2*i] + phrase [2*i+1];
   }
+  var passphrase = phrase.join('');
   passphrase = passphrase.substring(0,passphrase.length - 1);
-  // passphrase generated, modify with special characters if turned on
-  if (specialCharacterSliderEL.getAttribute("name")===true) {
 
-  }
-
-  // modify with numbers if turned on
-  if (numberSliderEl.getAttribute("name")===true){
-
-  }
-
-  document.getElementById("passphrase-output").innerHTML = passphrase;
+  modifyPassPhrase(passphrase,wordNumber);
 }
 
 function generateByCharacters(language,characters){
   wordStats(language,characters);
   start: while (true) {
     var phrase = [];
-    var passphrase = "";
     for (let i = 0; i < numberOfWords; i++) {
-      var randomnumber = Math.floor(Math.random()*language.length);
-      var word = language[randomnumber];
+      var randomNumber = Math.floor(Math.random()*language.length);
+      var word = language[randomNumber];
       phrase[2*i] = word;
       phrase[2*i+1] = "-";
-      passphrase += phrase[2*i] + phrase[2*i+1];
     }
+    var passphrase = phrase.join('');
     passphrase = passphrase.substring(0,passphrase.length - 1);
-    console.log(passphrase);
     if (passphrase.length === characters) {
       break;
     }
   }
-  document.getElementById("passphrase-output").innerHTML = passphrase;
+  modifyPassPhrase(passphrase,numberOfWords);
 }
 
 
@@ -160,4 +153,46 @@ function wordStats(language,characterCount) {
      zcheck[i] = Math.abs(1 - (character/wordIndex[i]));
    }
    numberOfWords = zcheck.indexOf(Math.min(...zcheck))+1;
+}
+
+function modifyPassPhrase(passphrase,wordNumber){
+
+  // passphrase generated, modify with special characters if turned on
+  if (parseBool(specialCharacterSliderEL.getAttribute("name"))===true) {
+    var letters = passphrase.split("");
+    if(wordNumber === 1) {
+      var passPhraseSelection = Math.floor(Math.random()*letters.length);
+      var specialSelection = Math.floor(Math.random()*specialChar.length);
+      letters[passPhraseSelection]=specialChar[specialSelection];
+    } else {
+      for (let i = 0; i < letters.length; i++) {
+        if (letters[i] === "-") {
+          var randomSelection = Math.floor(Math.random()*specialChar.length);
+          letters[i] = specialChar[randomSelection];
+        }
+      }
+    }
+    passphrase = letters.join('');
+  }
+
+  // modify with numbers if numbers slider is turned on
+  if (parseBool(numberSliderEl.getAttribute("name"))===true){
+    var letters = passphrase.split("");
+    var istrue = false;
+    while (true) {
+      for (let i = 0; i < letters.length; i++) {
+        var randomCheck=Math.random();
+        if (specialChar.indexOf(letters[i]) === -1 && randomCheck < 0.125) {
+          letters[i] = Math.floor(Math.random()*10);
+          istrue = true;
+        }
+      }
+      if (istrue === true){
+        break;
+      }
+    }
+    passphrase = letters.join('');
+  }
+  //Write to output box
+  document.getElementById("passphrase-output").innerHTML = passphrase;
 }

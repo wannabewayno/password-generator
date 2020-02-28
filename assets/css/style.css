@@ -58,10 +58,14 @@ body {
     border:2px solid black;
     border-radius: 5px;
     background-color:#B00E0A;
-    transition: 400ms;
+    transition: 200ms;
     outline:none;
 }
 
 .BigRedButton:hover {
     background-color: #f1120e;
+}
+
+.BigRedButton:active {
+    background-color:#B00E0A;
 }
