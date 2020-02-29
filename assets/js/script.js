@@ -296,8 +296,8 @@ function cleanUp(array) {
   }
 }
 // removes words under three from the source lists. Some entries were placeholders that were never removed from the author
-cleanUp(keyMapLanguages["Français"]);
-cleanUp(keyMapLanguages["Espagnol"]);
-cleanUp(keyMapLanguages["Italiano"]);
-cleanUp(keyMapLanguages["Русский"]);
+cleanUp(keyMapLanguages[french]);
+cleanUp(keyMapLanguages[spanish]);
+cleanUp(keyMapLanguages[italian]);
+cleanUp(keyMapLanguages[russian]);
 
