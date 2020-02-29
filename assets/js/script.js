@@ -76,8 +76,8 @@ uppercaseCharacterSliderEl.addEventListener("click",isChecked);
 
 // Variables
 // percentage of password will contain (Used in Modify Function)
-var numbersPercent = 0.125;
-var uppercasePercent = 0.125;
+var numbersPercent = 0.15;
+var uppercasePercent = 0.15;
 
 
 // a useful Boolean function for parsing strings (REQUIRED FOR BUTTONBOX)
