@@ -3,7 +3,7 @@
 var keyMapLanguages = {};
 var english = "English";
 var french = "Français";
-var spanish = "Espagnol";
+var spanish = "Español";
 var italian = "Italiano";
 var russian = "Русский";
 
