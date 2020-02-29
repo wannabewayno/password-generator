@@ -58,18 +58,26 @@ var specialChar = ["!","@","#","$","?","&","*"];
 var languages = [];
 
 
-// EVENT LISTENERS
+// HTML handles 
 var generatebuttonEL = document.getElementById("generate")
 var buttonBoxEl = document.getElementById("buttonBox");
 var  radioButtonEl = document.getElementById("radio-button");
 var specialCharacterSliderEL= document.getElementById("specials");
 var numberSliderEl= document.getElementById("numbers");
+var uppercaseCharacterSliderEl=document.getElementById("uppercase");
 
+// EVENT LISTENERS
 buttonBoxEl.addEventListener("click",stickyButton);
 generatebuttonEL.addEventListener("click",generate);
 radioButtonEl.addEventListener("click",radioButtons);
 specialCharacterSliderEL.addEventListener("click",isChecked);
 numberSliderEl.addEventListener("click",isChecked);
+uppercaseCharacterSliderEl.addEventListener("click",isChecked);
+
+// Variables
+// percentage of password will contain (Used in Modify Function)
+var numbersPercent = 0.125;
+var uppercasePercent = 0.125;
 
 
 // a useful Boolean function for parsing strings (REQUIRED FOR BUTTONBOX)
@@ -216,8 +224,8 @@ function wordStats(characterCount) {
    numberOfWords = zcheck.indexOf(Math.min(...zcheck))+1;
 }
 
-function modifyPassPhrase(passphrase,wordNumber){
 
+function modifyPassPhrase(passphrase,wordNumber){
   // passphrase generated, modify with special characters if turned on
   if (parseBool(specialCharacterSliderEL.getAttribute("name"))===true) {
     var letters = passphrase.split("");
@@ -235,7 +243,6 @@ function modifyPassPhrase(passphrase,wordNumber){
     }
     passphrase = letters.join('');
   }
-
   // modify with numbers if numbers slider is turned on
   if (parseBool(numberSliderEl.getAttribute("name"))===true){
     var letters = passphrase.split("");
@@ -243,7 +250,7 @@ function modifyPassPhrase(passphrase,wordNumber){
     while (true) {
       for (let i = 0; i < letters.length; i++) {
         var randomCheck=Math.random();
-        if (specialChar.indexOf(letters[i]) === -1 && randomCheck < 0.125) {
+        if (specialChar.indexOf(letters[i]) === -1 && randomCheck < numbersPercent) {
           letters[i] = Math.floor(Math.random()*10);
           istrue = true;
         }
@@ -254,6 +261,25 @@ function modifyPassPhrase(passphrase,wordNumber){
     }
     passphrase = letters.join('');
   }
+  // Modify with Uppercase Characters if turned on
+  if (parseBool(uppercaseCharacterSliderEl.getAttribute("name"))===true){
+    var letters = passphrase.split("");
+    var istrue = false;
+    while (true) {
+      for (let i = 0; i < letters.length; i++) {
+        var randomCheck=Math.random();
+        if (specialChar.indexOf(letters[i]) === -1 && isNaN(letters[i]) === true && randomCheck < uppercasePercent) {
+          letters[i] = letters[i].toUpperCase();
+          istrue = true;
+        }
+      }
+      if (istrue === true){
+        break;
+      }
+    }
+    passphrase = letters.join('');
+  }
+
   //Write to output box
   document.getElementById("passphrase-output").innerHTML = passphrase;
 }
@@ -270,6 +296,7 @@ function cleanUp(array) {
       }
   }
 }
+// removes words under three from the source lists. Some entries were placeholders that were never removed from the author
 cleanUp(keyMapLanguages[french]);
 cleanUp(keyMapLanguages[spanish]);
 cleanUp(keyMapLanguages[italian]);
