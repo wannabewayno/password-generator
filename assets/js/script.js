@@ -3,7 +3,7 @@
 var keyMapLanguages = {};
 var english = "English";
 var french = "Français";
-var spanish = "Español";
+var spanish = "Espagnol";
 var italian = "Italiano";
 var russian = "Русский";
 
@@ -286,19 +286,18 @@ function modifyPassPhrase(passphrase,wordNumber){
 
 //Write a crawler function that removes gibberish from source language arrays 
 function cleanUp(array) {
-  var old_length = array.length;
   var max = array.length;
   for (let i = 0; i < max; i++) {
-      if (array[i].length < 3){
-          array.splice(i,1);
-          max--;
-          i--;
-      }
+    if (array[i].length < 3) {
+      array.splice(i,1);
+      max--;
+      i--;
+    }
   }
 }
 // removes words under three from the source lists. Some entries were placeholders that were never removed from the author
-cleanUp(keyMapLanguages[french]);
-cleanUp(keyMapLanguages[spanish]);
-cleanUp(keyMapLanguages[italian]);
-cleanUp(keyMapLanguages[russian]);
+cleanUp(keyMapLanguages["Français"]);
+cleanUp(keyMapLanguages["Espagnol"]);
+cleanUp(keyMapLanguages["Italiano"]);
+cleanUp(keyMapLanguages["Русский"]);
 
