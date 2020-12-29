@@ -9,5 +9,5 @@ After familiarising themselves with the information provided, they are prompted 
 
 The password generator uses the diceware method by randomly generating numbers and assigning them to words with a look-up-table. The user can specify further if they want this pass-phrase to be jumbled with numbers or special characters to increase security, however by generally reducing memorization.
 
-### Check it out
+### Check it out below
 <a href=https://wannabewayno.github.io/password-generator>Pass-Phrase Generator<a>.
